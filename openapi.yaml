@@ -1,0 +1,134 @@
+openapi: 3.1.0
+info:
+  title: WolframAlpha Full SUPT Integration
+  description: SUPT-enhanced Wolfram|Alpha integration for proxy-based resonance measurement, short answers, full results, spoken responses, and images.
+  version: 1.0.1
+servers:
+  - url: https://api.wolframalpha.com
+    description: WolframAlpha API server
+paths:
+  /v1/result:
+    get:
+      operationId: getShortAnswer
+      summary: Get a short plain-text answer from Wolfram|Alpha.
+      parameters:
+        - name: i
+          in: query
+          required: true
+          description: The input query.
+          schema:
+            type: string
+        - name: appid
+          in: query
+          required: true
+          description: Your Wolfram|Alpha AppID.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Short plain-text result.
+          content:
+            text/plain:
+              schema:
+                type: string
+        '501':
+          description: Wolfram|Alpha cannot compute the answer.
+  /v2/query:
+    get:
+      operationId: getFullResults
+      summary: Get full results from Wolfram|Alpha in JSON format.
+      parameters:
+        - name: input
+          in: query
+          required: true
+          description: The input query for Wolfram|Alpha.
+          schema:
+            type: string
+        - name: appid
+          in: query
+          required: true
+          description: Your Wolfram|Alpha AppID.
+          schema:
+            type: string
+        - name: output
+          in: query
+          required: false
+          description: Output format; use JSON for structured results.
+          schema:
+            type: string
+            default: JSON
+        - name: format
+          in: query
+          required: false
+          description: Specify response format (e.g., plaintext).
+          schema:
+            type: string
+      responses:
+        '200':
+          description: JSON response with full results from Wolfram|Alpha.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  queryresult:
+                    type: object
+                    description: Root object containing all query results from Wolfram|Alpha.
+                    additionalProperties: true
+        '400':
+          description: Invalid input or malformed request.
+  /v1/spoken:
+    get:
+      operationId: getSpokenResult
+      summary: Get a spoken version of the result from Wolfram|Alpha.
+      parameters:
+        - name: i
+          in: query
+          required: true
+          description: The input query.
+          schema:
+            type: string
+        - name: appid
+          in: query
+          required: true
+          description: Your Wolfram|Alpha AppID.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Spoken text result.
+          content:
+            text/plain:
+              schema:
+                type: string
+        '501':
+          description: Wolfram|Alpha cannot compute a spoken result.
+  /v1/simple:
+    get:
+      operationId: getSimpleImage
+      summary: Get a simple image result from Wolfram|Alpha.
+      parameters:
+        - name: i
+          in: query
+          required: true
+          description: The input query.
+          schema:
+            type: string
+        - name: appid
+          in: query
+          required: true
+          description: Your Wolfram|Alpha AppID.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A simple visual result in image format.
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+            image/gif:
+              schema:
+                type: string
+                format: binary

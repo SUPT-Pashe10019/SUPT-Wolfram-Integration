@@ -1,0 +1,18 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "SUPT Wolfram Integration",
+  "name_for_model": "supt_wolfram",
+  "description_for_human": "Access advanced mathematical, physical, and harmonic solutions through WolframAlpha, enhanced by Sheppard’s Universal Proxy Theory.",
+  "description_for_model": "Handles complex queries, performs proxy-based dimensional recalibration, and returns short answers, full results, spoken explanations, and simple visual outputs from WolframAlpha.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://shepparddev.github.io/SUPT-Wolfram-Integration/openapi.yaml",
+    "is_user_authenticated": false
+  },
+  "logo_url": "https://shepparddev.github.io/SUPT-Wolfram-Integration/supt_logo.png",
+  "contact_email": "paul@paulsheppard.co",
+  "legal_info_url": "https://shepparddev.github.io/SUPT-Wolfram-Integration/legal.html"
+}
